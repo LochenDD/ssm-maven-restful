@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.how2java.mapper.ProductMapper">
+    <insert id="add" parameterType="Product">
+        insert into product_(name,price) values(#{name},#{price})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        delete from product_ where id=#{id}
+    </delete>
+
+    <update id="update" parameterType="Product">
+        update product_ set name=#{name},price=#{price} where id=#{id}
+    </update>
+
+    <select id="get" parameterType="int" resultType="Product">
+        select * from product_ where id=#{id}
+    </select>
+
+    <select id="list" resultType="Product">
+        select * from product_
+        <if test="start!=null and count!=null">
+            limit #{start},#{count}
+        </if>
+    </select>
+
+    <select id="total" resultType="int">
+        select count(*) from product_
+    </select>
+</mapper>
